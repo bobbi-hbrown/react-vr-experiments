@@ -1,4 +1,5 @@
 import React from 'react';
+import {Environment} from 'react-360';
 import {
   AppRegistry,
   StyleSheet,
@@ -19,18 +20,45 @@ export default class react_vr_experiments extends React.Component {
     this.setState({count: this.state.count + 1});
   };
 
+  dynamicBackground = (imageType) => {
+
+    Environment.setBackground(
+        asset(`static_assets/${imageType}.jpg`),
+        {format: '3D'}, /* one of the formats mentioned above */
+    )
+  }
 
   render() {
     // Reference the count in our UI
     return (
       <View style={styles.panel}>
+        <Text>Welcome to Bobbi's VR app! Where do you want to go? ?</Text>
+        <Text>Welcome to Bobbi's VR app! Where do you want to go? ?</Text>
+
         <VrButton
-          onClick={this._incrementCount}
+          onClick={this.dynamicBackground(lake)}
           style={styles.greetingBox}>
           <Text style={styles.greeting}>
-            {`Count: ${this.state.count}`}
+            The beach!
           </Text>
         </VrButton>
+
+        <VrButton
+            onClick={this.dynamicBackground(room)}
+            style={styles.greetingBox}>
+          <Text style={styles.greeting}>
+            The room!
+          </Text>
+        </VrButton>
+
+        <VrButton
+            onClick={this.dynamicBackground(miami-downtown)}
+            style={styles.greetingBox}>
+          <Text style={styles.greeting}>
+            Downtown Miami!
+          </Text>
+        </VrButton>
+
     </View>
     );
   }
